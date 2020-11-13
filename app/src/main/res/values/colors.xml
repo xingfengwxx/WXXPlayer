@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!--primary color-->
+    <color name="colorPrimary">#FF3A3A</color>
+    <color name="colorPrimaryDark">#FF3A3A</color>
+    <color name="colorAccent">#FF3A3A</color>
+    <color name="colorPrimaryWindowBg">#f8f8f9</color>
+    <color name="colorMainText">#FF3A3A</color>
+
+    <color name="white_8p">#14FFFFFF</color>
+    <color name="white_16p">#29FFFFFF</color>
+    <color name="white_24p">#3DFFFFFF</color>
+    <color name="white_50p">#80FFFFFF</color>
+    <color name="white_96p">#F5FFFFFF</color>
+    <color name="black_50p">#80000000</color>
+    <color name="red">#F44336</color>
+    <color name="red_30p">#4CF44336</color>
+    <color name="grey">#9E9E9E</color>
+    <color name="grey_50p">#809E9E9E</color>
+    <color name="grey_300">#E0E0E0</color>
+    <color name="grey_700_96p">#F5616161</color>
+    <color name="grey_300_96p">#F5E0E0E0</color>
+    <color name="grey_900_96p">#F5212121</color>
+    <color name="transparent">#00000000</color>
+
+    <!--divider color-->
+    <color name="divider_color_gray">#d6d6d6</color>
+    <color name="divider_color_gray2">#e6e6e6</color>
+
+    <!--bg color-->
+    <color name="bg_color_toast">#aaf4383b</color>
+    <color name="bg_color_load_img">#EFEFEF</color>
+
+    <!--home bar text-->
+    <color name="tab_color_default">#aaffffff</color>
+    <color name="tab_color_selected">#ffffff</color>
+</resources>
