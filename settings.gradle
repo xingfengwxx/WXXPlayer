@@ -1,2 +1,3 @@
+include ':skinsupport'
 include ':app'
 rootProject.name = "WXXPlayer"
