@@ -55,7 +55,7 @@ public class SkinAttribute {
 
     public void load(View view, AttributeSet attrs) {
         List<SkinPair> skinPairList = new ArrayList<>();
-        for (int i = 0; i < skinPairList.size(); i++) {
+        for (int i = 0; i < attrs.getAttributeCount(); i++) {
             // 获得属性名mAttributes
             String attributeName = attrs.getAttributeName(i);
             if (mAttributes.contains(attributeName)) {

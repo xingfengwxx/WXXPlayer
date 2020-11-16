@@ -48,6 +48,11 @@ public class SkinManager extends Observable {
         // 资源管理类 用于从 app/皮肤包 中加载资源
         SkinResources.init(application);
 
+        /**
+         * 提供了一个应用生命周期回调的注册方法，用来对应用的生命周期进行集中管理。
+         * 这个接口叫registerActivityLifecycleCallbacks，可以通过它注册
+         * 自己的ActivityLifeCycleCallback，每一个Activity的生命周期都会回调到这里的对应方法。
+         */
         mSkinActivityLifecycle = new SkinActivityLifecycle();
         application.registerActivityLifecycleCallbacks(mSkinActivityLifecycle);
 
@@ -103,7 +108,7 @@ public class SkinManager extends Observable {
         // 通知采集的View更新皮肤
         // 被观察者改变通知所有观察者
         setChanged();
-        notifyObservers();
+        notifyObservers(null);
     }
 
     public void updateSkin(Activity activity) {
