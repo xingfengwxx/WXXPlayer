@@ -1,8 +1,10 @@
 package com.wangxingxing.skinsupport.core;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -98,5 +100,51 @@ public class SkinResources {
         }
 
         return null;
+    }
+
+    public Drawable getDrawable(int resId) {
+        if (isDefaultSkin) {
+            return mAppResources.getDrawable(resId);
+        }
+
+        int skinId = getIdentifier(resId);
+        if (skinId == 0) {
+            return mAppResources.getDrawable(resId);
+        }
+        return mSkinResources.getDrawable(skinId);
+    }
+
+    /**
+     * 获取背景
+     *
+     * @param resId
+     * @return 可能是Color 也可能是drawable
+     */
+    public Object getBackground(int resId) {
+        String resourceTypeName = mAppResources.getResourceTypeName(resId);
+
+        if (resourceTypeName.equals("color")) {
+            return getColor(resId);
+        } else {
+            // drawable
+            return getDrawable(resId);
+        }
+    }
+
+    public ColorStateList getColorStateList(int resId) {
+        if (isDefaultSkin) {
+            return mAppResources.getColorStateList(resId);
+        }
+        int skinId = getIdentifier(resId);
+        if (skinId == 0) {
+            return mAppResources.getColorStateList(resId);
+        }
+        return mSkinResources.getColorStateList(skinId);
+    }
+
+    public void reset() {
+        mSkinResources = null;
+        mSkinPkgName = "";
+        isDefaultSkin = true;
     }
 }
