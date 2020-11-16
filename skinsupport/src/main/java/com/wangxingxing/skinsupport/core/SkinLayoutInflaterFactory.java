@@ -28,8 +28,6 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory2, Obser
             "android.widget.",
             "android.view.",
             "android.webkit.",
-
-//            "androidx.appcompat.widget."
     };
 
     // 构造方法可能有多个，这个相当于指定我去找对应参数的构造方法
