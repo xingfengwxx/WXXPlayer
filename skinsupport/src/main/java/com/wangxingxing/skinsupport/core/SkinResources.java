@@ -147,4 +147,11 @@ public class SkinResources {
         mSkinPkgName = "";
         isDefaultSkin = true;
     }
+
+    public void applySkin(Resources resources, String packageName) {
+        mSkinResources = resources;
+        mSkinPkgName = packageName;
+        // 是否使用默认皮肤
+        isDefaultSkin = TextUtils.isEmpty(packageName) || resources == null;
+    }
 }

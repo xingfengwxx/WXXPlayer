@@ -2,6 +2,7 @@ package com.wangxingxing.wxxplayer;
 
 import android.app.Application;
 
+import com.wangxingxing.skinsupport.SkinManager;
 import com.wangxingxing.wxxplayer.utils.DisplayUtils;
 
 /**
@@ -16,5 +17,6 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         DisplayUtils.init(this);
+        SkinManager.init(this);
     }
 }

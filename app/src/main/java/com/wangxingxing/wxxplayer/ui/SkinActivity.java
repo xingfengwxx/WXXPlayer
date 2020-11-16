@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.wangxingxing.skinsupport.SkinManager;
 import com.wangxingxing.wxxplayer.R;
 import com.wangxingxing.wxxplayer.skin.Skin;
 import com.wangxingxing.wxxplayer.skin.SkinUtils;
@@ -43,7 +44,7 @@ public class SkinActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_skin);
         initViews();
         addSkins();
-//        SkinManager.getInstance().updateSkin(this);
+        SkinManager.getInstance().updateSkin(this);
     }
 
     private void addSkins() {
@@ -126,14 +127,14 @@ public class SkinActivity extends AppCompatActivity implements View.OnClickListe
         skinMode = mode;
         switch (mode) {
             case 1:
-//                SkinManager.getInstance().loadSkin(null);
+                SkinManager.getInstance().loadSkin(null);
                 break;
             case 4:
                 // 使用第4个皮肤
                 Skin skin = skins.get(0);
                 selectSkin(skin);
                 // 换肤
-//                SkinManager.getInstance().loadSkin(skin.path);
+                SkinManager.getInstance().loadSkin(skin.path);
                 break;
         }
     }

@@ -55,7 +55,7 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
         // 添加到缓存中
         mSkinLayoutInflaterFactoryMap.put(activity, skinLayoutInflaterFactory);
         // 添加观察者
-        SkinManager
+        SkinManager.getInstance().addObserver(skinLayoutInflaterFactory);
     }
 
     @Override
@@ -85,6 +85,16 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
 
     @Override
     public void onActivityDestroyed(Activity activity) {
+        // 从集合中删除并取消观察
+        SkinLayoutInflaterFactory observer = mSkinLayoutInflaterFactoryMap.get(activity);
+        mSkinLayoutInflaterFactoryMap.remove(observer);
+        SkinManager.getInstance().deleteObserver(observer);
+    }
 
+    public void updateSkin(Activity activity) {
+        SkinLayoutInflaterFactory factory = mSkinLayoutInflaterFactoryMap.get(activity);
+        if (factory != null) {
+            factory.update(null, null);
+        }
     }
 }

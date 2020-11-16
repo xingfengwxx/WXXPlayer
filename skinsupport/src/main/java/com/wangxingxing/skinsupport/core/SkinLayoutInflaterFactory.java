@@ -27,7 +27,9 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory2, Obser
     private static final String[] mClassPrefixList = {
             "android.widget.",
             "android.view.",
-            "android.webkit."
+            "android.webkit.",
+
+//            "androidx.appcompat.widget."
     };
 
     // 构造方法可能有多个，这个相当于指定我去找对应参数的构造方法
@@ -88,7 +90,7 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory2, Obser
         try {
             return constructor.newInstance(context, attrs);
         } catch (Exception e) {
-            e.printStackTrace();
+
         }
         return null;
     }
@@ -101,7 +103,7 @@ public class SkinLayoutInflaterFactory implements LayoutInflater.Factory2, Obser
                 constructor = clazz.getConstructor(mConstructorSignature);
                 mConstructorMap.put(name, constructor);
             } catch (Exception e) {
-                e.printStackTrace();
+
             }
         }
         return constructor;

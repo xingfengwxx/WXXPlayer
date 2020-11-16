@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.wangxingxing.skinsupport.SkinManager;
 import com.wangxingxing.wxxplayer.base.BasePagerAdapter;
 import com.wangxingxing.wxxplayer.ui.MenuFragment;
 import com.wangxingxing.wxxplayer.ui.MusicHomeFragment;
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addFragments();
         setDrawerLayout();
         initViewpager();
-//        SkinManager.getInstance().updateSkin(this);
+        SkinManager.getInstance().updateSkin(this);
     }
 
     private void addFragments() {
