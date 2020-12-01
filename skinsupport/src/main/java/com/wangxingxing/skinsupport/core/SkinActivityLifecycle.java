@@ -29,12 +29,6 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
     @Override
     public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
 
-        // 更新状态栏
-        SkinUtils.updateStatusBarColor(activity);
-
-        // 更新字体
-        Typeface typeface = SkinUtils.getSkinTypeface(activity);
-
         // 在这里做更新布局视图
         // 获得Activity的布局加载器
         LayoutInflater layoutInflater = LayoutInflater.from(activity);
@@ -48,6 +42,12 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+
+        // 更新状态栏
+        SkinUtils.updateStatusBarColor(activity);
+
+        // 更新字体
+        Typeface typeface = SkinUtils.getSkinTypeface(activity);
 
         // 使用factory2 设置布局加载工程
         SkinLayoutInflaterFactory skinLayoutInflaterFactory = new SkinLayoutInflaterFactory(activity, typeface);

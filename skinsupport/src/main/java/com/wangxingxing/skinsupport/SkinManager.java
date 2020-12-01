@@ -115,4 +115,13 @@ public class SkinManager extends Observable {
         Log.i(TAG, "updateSkin: ");
         mSkinActivityLifecycle.updateSkin(activity);
     }
+
+    /**
+     * 获取SharedPreferences中最近使用的皮肤包路径
+     *
+     * @return String 皮肤包路径
+     */
+    public String getPreferenceSkinPath() {
+        return SkinPreference.getInstance().getSkin();
+    }
 }

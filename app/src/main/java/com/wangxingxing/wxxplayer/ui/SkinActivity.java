@@ -44,11 +44,46 @@ public class SkinActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_skin);
         initViews();
         addSkins();
-        SkinManager.getInstance().updateSkin(this);
+//        SkinManager.getInstance().updateSkin(this);
     }
 
     private void addSkins() {
-        skins.add(new Skin("b9078cdea98eea7c73452ebed9aae17e", "1111111.skin", "app-debug.apk"));
+        skins.add(new Skin("97e434d74319c8fa0bd6138aedaa2f5f", "purple.skin", "skinapp_purple.apk"));
+        skins.add(new Skin("37488e5c4d43da7f728e1d99f147a9e9", "blue.skin", "skinapp_blue.apk"));
+        skins.add(new Skin("57652e8eac2092dbb4f384ce82e63839", "black.skin", "skinapp_black.apk"));
+
+        String skinPath = SkinManager.getInstance().getPreferenceSkinPath();
+        Log.i("TAG", "skinPath=" + skinPath);
+        if (TextUtils.isEmpty(skinPath)) {
+            skinMode = 1;
+        } else if (skinPath.contains("purple.skin")) {
+            skinMode = 2;
+        } else if (skinPath.contains("blue.skin")) {
+            skinMode = 3;
+        } else if (skinPath.contains("black.skin")) {
+            skinMode = 4;
+        }
+        setSelectView(skinMode);
+    }
+
+    private void setSelectView(int mode) {
+        for (TextView tv : tvStates) {
+            tv.setVisibility(View.GONE);
+        }
+        switch (mode) {
+            case 1:
+                tvState1.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                tvState2.setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                tvState3.setVisibility(View.VISIBLE);
+                break;
+            case 4:
+                tvState4.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 
     private void initViews() {
@@ -125,17 +160,26 @@ public class SkinActivity extends AppCompatActivity implements View.OnClickListe
     private void changeSkin(int mode) {
         if (skinMode == mode) return;
         skinMode = mode;
+        Skin skin = null;
         switch (mode) {
             case 1:
-                SkinManager.getInstance().loadSkin(null);
+                skin = null;
+                break;
+            case 2:
+                skin = skins.get(0);
+                break;
+            case 3:
+                skin = skins.get(1);
                 break;
             case 4:
-                // 使用第4个皮肤
-                Skin skin = skins.get(0);
-                selectSkin(skin);
-                // 换肤
-                SkinManager.getInstance().loadSkin(skin.path);
+                skin = skins.get(2);
                 break;
+        }
+        if (skin != null) {
+            selectSkin(skin);
+            SkinManager.getInstance().loadSkin(skin.path);
+        } else {
+            SkinManager.getInstance().loadSkin(null);
         }
     }
 

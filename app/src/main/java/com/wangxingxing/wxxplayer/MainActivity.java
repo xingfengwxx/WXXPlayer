@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addFragments();
         setDrawerLayout();
         initViewpager();
-        SkinManager.getInstance().updateSkin(this);
+//        SkinManager.getInstance().updateSkin(this);
     }
 
     private void addFragments() {
