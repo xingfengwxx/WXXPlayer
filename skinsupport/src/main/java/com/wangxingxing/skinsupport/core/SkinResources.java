@@ -12,7 +12,7 @@ import android.util.Log;
  * author : 王星星
  * date : 2020/11/13 17:52
  * email : 1099420259@qq.com
- * description : 换肤资源管理类，处理换肤操作业务
+ * description : 换肤资源管理类，用于从app皮肤包中加载资源
  */
 public class SkinResources {
 
@@ -20,10 +20,13 @@ public class SkinResources {
 
     private static SkinResources instance;
 
+	// 加载了皮肤包后创建的Resources
     private Resources mSkinResources;
+	// 皮肤包名
     private String mSkinPkgName;
     private boolean isDefaultSkin = true;
 
+ 	// App自己的Resources
     private Resources mAppResources;
 
     public static SkinResources getInstance() {
@@ -51,21 +54,27 @@ public class SkinResources {
         }
         int skinId = getIdentifier(resId);
         if (skinId == 0) {
+		 	// 当皮肤包中不存在的时候
+            // 依然使用原APP的对应值
             return mAppResources.getColor(resId);
         }
         return mSkinResources.getColor(skinId);
     }
 
-    private int getIdentifier(int resId) {
+
+    // 加载了皮肤包后获取资源ID的方法
+    public int getIdentifier(int resId) {
         if (isDefaultSkin) {
+            // 默认的皮肤，直接用原APP的
             return resId;
         }
         // 在皮肤包中不一定就是 当前程序的 id
-        // 获取对应id 在当前的名称 colorPrimary
+        // 获取对应id 在当前的名称
         String resName = mAppResources.getResourceEntryName(resId);
         String resType = mAppResources.getResourceTypeName(resId);
-        int skinId = mSkinResources.getIdentifier(resName, resType, mSkinPkgName);
-        return skinId;
+        // 重新获取指定应用包下的指定资源ID
+        int skinResId = mSkinResources.getIdentifier(resName, resType, mSkinPkgName);
+        return skinResId;
     }
 
     public Typeface getTypeface(int resId) {
@@ -85,7 +94,7 @@ public class SkinResources {
         return Typeface.DEFAULT;
     }
 
-    private String getString(int resId) {
+    public String getString(int resId) {
         try {
             if (isDefaultSkin) {
                 return mAppResources.getString(resId);
@@ -148,6 +157,13 @@ public class SkinResources {
         isDefaultSkin = true;
     }
 
+    /**
+     * 提交新的属性值
+     * 最后通过观察者模式，通知使用这些新的属性
+     *
+     * @param resources
+     * @param packageName
+     */
     public void applySkin(Resources resources, String packageName) {
         mSkinResources = resources;
         mSkinPkgName = packageName;

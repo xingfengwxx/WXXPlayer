@@ -8,5 +8,5 @@ package com.wangxingxing.skinsupport.core;
  */
 public interface SkinViewSupport {
 
-    void applySKin();
+    void applySkin();
 }

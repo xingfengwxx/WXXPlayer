@@ -4,7 +4,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.TextureView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,9 +20,11 @@ import java.util.List;
  * author : 王星星
  * date : 2020/11/15 20:09
  * email : 1099420259@qq.com
- * description :
+ * description : 用来采集需要换肤的View和他的属性及属性值,把View和它的[属性及属性值]的集合进行封装保存
  */
 public class SkinAttribute {
+
+    private static final String TAG = "SkinAttribute";
 
     // 需要换肤的属性集合
     private static final List<String> mAttributes = new ArrayList<>();
@@ -53,10 +55,17 @@ public class SkinAttribute {
     // 记录换肤需要操作的View与属性信息
     private List<SkinView> mSkinViews = new ArrayList<>();
 
+    /**
+     * 核心方法
+     * 用于采集属性及属性值并封装保存
+     *
+     * @param view
+     * @param attrs AttributeSet是xml节点的属性集合
+     */
     public void load(View view, AttributeSet attrs) {
         List<SkinPair> skinPairList = new ArrayList<>();
         for (int i = 0; i < attrs.getAttributeCount(); i++) {
-            // 获得属性名mAttributes
+            // 获得属性名，判断是否属于要采集的 mAttributes.contains?
             String attributeName = attrs.getAttributeName(i);
             if (mAttributes.contains(attributeName)) {
                 String attributeValue = attrs.getAttributeValue(i);
@@ -66,6 +75,8 @@ public class SkinAttribute {
                 }
                 int resId;
                 if (attributeValue.startsWith("?")) {
+                    // 使用系统的属性值
+                    Log.i(TAG, "attributeValue-->" + attributeValue);
                     int attrId = Integer.parseInt(attributeValue.substring(1));
                     resId = SkinUtils.getResId(view.getContext(), new int[]{attrId})[0];
                 } else {
@@ -96,10 +107,12 @@ public class SkinAttribute {
     }
 
     /**
-     * 对View对象和它的所有属性名和对应值的集合的包装
+     * 采集对象的最终封装：
+     * 把View和它的[属性及属性值]的集合进行封装保存
      */
     static class SkinView {
         View view;
+        // 属性及属性值集合
         List<SkinPair> skinPairs = new ArrayList<>();
 
         public SkinView(View view, List<SkinPair> skinPairs) {
@@ -108,10 +121,12 @@ public class SkinAttribute {
         }
 
         /**
-         * 遍历属性名和对应值的集合，设置属性
+         * 核心方法：
+         * 遍历这个View的[属性及属性值]集合，给控件设值
          */
         public void applySkin(Typeface typeface) {
-            applyTypeface(typeface);
+            // 实现全部字体替换，就在这里
+            //applyTypeFace(typeface);
             applySkinSupport();
             for (SkinPair skinPair : skinPairs) {
                 Drawable left = null, top = null, right = null, bottom = null;
@@ -129,7 +144,7 @@ public class SkinAttribute {
                         if (background instanceof Integer) {
                             ((ImageView) view).setImageDrawable(new ColorDrawable((Integer) background));
                         } else {
-                            ((ImageView) view).setImageDrawable(((Drawable) background));
+                            ((ImageView) view).setImageDrawable((Drawable) background);
                         }
                         break;
                     case "textColor":
@@ -148,7 +163,8 @@ public class SkinAttribute {
                         right = SkinResources.getInstance().getDrawable(skinPair.resId);
                         break;
                     case "skinTypeface":
-                        applyTypeface(SkinResources.getInstance().getTypeface(skinPair.resId));
+                        // 单独实现某一种的TextView的字体替换
+                        applyTypeFace(SkinResources.getInstance().getTypeface(skinPair.resId));
                         break;
                     default:
                         break;
@@ -159,13 +175,15 @@ public class SkinAttribute {
             }
         }
 
+        // 调用自定义控件的applySkin
         private void applySkinSupport() {
             if (view instanceof SkinViewSupport) {
-                ((SkinViewSupport) view).applySKin();
+                ((SkinViewSupport) view).applySkin();
             }
         }
 
-        private void applyTypeface(Typeface typeface) {
+        // 设置字体
+        private void applyTypeFace(Typeface typeface) {
             if (view instanceof TextView) {
                 ((TextView) view).setTypeface(typeface);
             }

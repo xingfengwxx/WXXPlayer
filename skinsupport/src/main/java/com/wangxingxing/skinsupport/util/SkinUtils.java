@@ -31,8 +31,9 @@ public class SkinUtils {
     };
 
     /**
+     * 获取attr索引所对应的资源ID
      * obtainStyledAttributes这里有点复杂
-     * 要去理解下这个attribute相关的东西
+     * 要去理解AttributeSet，TypedArray相关的东西
      *
      * @param context
      * @param attrs

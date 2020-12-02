@@ -94,6 +94,7 @@ public class SkinActivityLifecycle implements Application.ActivityLifecycleCallb
     public void updateSkin(Activity activity) {
         SkinLayoutInflaterFactory factory = mSkinLayoutInflaterFactoryMap.get(activity);
         if (factory != null) {
+            // 调用观察者update方法
             factory.update(null, null);
         }
     }

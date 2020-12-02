@@ -20,19 +20,21 @@ import java.util.Observer;
  * author : 王星星
  * date : 2020/11/15 19:58
  * email : 1099420259@qq.com
- * description :
+ * description : 继承了Factory2，用来创建View
  */
 public class SkinLayoutInflaterFactory implements LayoutInflater.Factory2, Observer {
 
     private static final String[] mClassPrefixList = {
             "android.widget.",
             "android.view.",
-            "android.webkit.",
+            "android.webkit."
     };
 
     // 构造方法可能有多个，这个相当于指定我去找对应参数的构造方法
     private static final Map<String, Constructor<? extends View>> mConstructorMap = new HashMap<>();
 
+    // 有什么作用？？
+    // 构造方法可能有多个，这个相当于指定我去找对应参数的构造方法
     private static final Class<?>[] mConstructorSignature = new Class[]{Context.class, AttributeSet.class};
 
     // 当选择新皮肤后需要替换View与之对应的属性
