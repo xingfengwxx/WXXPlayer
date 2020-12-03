@@ -4,10 +4,11 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/colorPrimaryWindowBg</item>
         <item name="android:windowAnimationStyle">@style/ActivityTransitions</item>
+        <item name="skinTypeface">@string/typeface</item>
     </style>
 
     <style name="ActivityTransitions" parent="@android:style/Animation">
